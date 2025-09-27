@@ -1,0 +1,134 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.main-content {
+  margin-left: 0;
+  padding-top: 2rem;
+}
+
+.page-container {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.page-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  text-align: center;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+.app-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.5rem;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease infinite;
+}
+
+.app-header p {
+  margin: 0 0 1.5rem 0;
+  color: #888;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes squiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(1deg) scale(1.02); }
+  75% { transform: rotate(-1deg) scale(0.98); }
+}
+
+/* Custom colors for navbar */
+.bg-eerie-black-bg {
+  background-color: #1a1a1a;
+}
+
+.text-icterine {
+  color: #fcf434;
+}
+
+.animate-squiggle {
+  animation: squiggle 0.6s ease-in-out;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.wallet-info,
+.connect-prompt {
+  text-align: center;
+  max-width: 600px;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  word-break: break-all;
+}
+
+.info-card p {
+  margin: 0.5rem 0;
+}
+
+.features {
+  margin-top: 2rem;
+}
+
+.features h3 {
+  margin-bottom: 1rem;
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  display: inline-block;
+}
+
+.features li {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
+
+.connect-prompt h2 {
+  margin-bottom: 1rem;
+}
+
+.connect-prompt p {
+  color: #888;
+}
