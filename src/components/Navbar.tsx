@@ -42,10 +42,10 @@ export default function Navbar() {
       }}
     >
       <div
-        className="relative flex bg-eerie-black-bg/80 text-gray-200/80 rounded-2xl shadow-2xl backdrop-blur-[60px] font-semibold tracking-wider uppercase"
+        className="relative flex bg-white text-gray-800 rounded-2xl shadow-2xl backdrop-blur-[60px] font-semibold tracking-wider uppercase"
         style={{
-          gap: expanded ? 24 : 0,
-          padding: expanded ? 8 : 8,
+          gap: expanded ? 32 : 0,
+          padding: expanded ? 12 : 8,
           transform: expanded ? "scaleX(1)" : "scaleX(0.94)",
           transformOrigin: "center",
           transition: `transform ${EXPAND_DURATION_MS}ms cubic-bezier(0.22, 1, 0.36, 1), gap ${EXPAND_DURATION_MS}ms ease, padding ${EXPAND_DURATION_MS}ms ease`
@@ -59,7 +59,7 @@ export default function Navbar() {
               key={item.href}
               to={item.href}
               className={`relative inline-flex items-center rounded-xl transition-all ease-out group ${
-                isActive ? "text-icterine" : "text-gray-200/80"
+                isActive ? "text-icterine" : "text-gray-800"
               } ${expanded ? "hover:animate-squiggle" : ""}`}
               style={{
                 padding: isVisible ? "10px 16px" : "0px",
@@ -74,12 +74,12 @@ export default function Navbar() {
               {/* Active background */}
               {isActive && (
                 <div 
-                  className="absolute inset-0 bg-white/10 rounded-xl transition-all duration-300 ease-out"
+                  className="absolute inset-0 bg-gray-100 rounded-xl transition-all duration-300 ease-out"
                 />
               )}
               {/* Hover background */}
               <div 
-                className="absolute inset-0 bg-white/5 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out"
+                className="absolute inset-0 bg-gray-50 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out"
               />
               <span className="relative z-10">{item.label}</span>
             </Link>
