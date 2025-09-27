@@ -28,7 +28,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className="sticky top-0 z-10 w-full flex flex-col pt-3 pb-2 font-mono"
+      className="sticky top-0 z-10 w-full flex flex-col items-center pt-4 font-mono"
       initial={{
         transform: "translateY(-80px)",
         opacity: 0,
@@ -43,13 +43,13 @@ export default function Navbar() {
       }}
     >
       <motion.div
-        className={`relative ${expanded ? "w-full" : "w-auto"} flex ${
+        className={`relative ${expanded ? "w-[1000px]" : "w-fit"} flex ${
           expanded ? "justify-between" : "justify-center"
         } items-center bg-white text-gray-800 rounded-2xl shadow-2xl backdrop-blur-[60px] font-semibold tracking-wider uppercase`}
         layout
         animate={{
-          padding: expanded ? "12px 24px" : "8px 24px",
-          scaleX: expanded ? 1 : 0.94,
+          padding: "12px 24px",
+          scaleX: 1,
         }}
         transition={{
           duration: EXPAND_DURATION_MS / 1000,
