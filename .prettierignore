@@ -1,0 +1,36 @@
+node_modules
+dist  
+build
+.vite
+yarn.lock
+package-lock.json
+
+# Logs
+logs/
+*.log
+
+# TypeScript build output
+**/*.js.map
+**/*.d.ts
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# Temporary files
+tmp/
+temp/
