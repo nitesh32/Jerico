@@ -19,10 +19,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const dropTimer = window.setTimeout(() => setDropped(true), 0);
-    const expandTimer = window.setTimeout(
-      () => setExpanded(true),
-      DROP_DURATION_MS
-    );
+    const expandTimer = window.setTimeout(() => setExpanded(true), DROP_DURATION_MS);
     return () => {
       clearTimeout(dropTimer);
       clearTimeout(expandTimer);
@@ -32,21 +29,23 @@ export default function Navbar() {
   return (
     <motion.nav
       className="sticky top-0 z-10 w-full flex flex-col pt-3 pb-2 font-mono"
-      initial={{ 
+      initial={{
         transform: "translateY(-80px)",
-        opacity: 0
+        opacity: 0,
       }}
-      animate={{ 
+      animate={{
         transform: dropped ? "translateY(0)" : "translateY(-80px)",
-        opacity: dropped ? 1 : 0
+        opacity: dropped ? 1 : 0,
       }}
       transition={{
         duration: DROP_DURATION_MS / 1000,
-        ease: [0.22, 1, 0.36, 1]
+        ease: [0.22, 1, 0.36, 1],
       }}
     >
       <motion.div
-        className={`relative ${expanded ? 'w-full' : 'w-auto'} flex ${expanded ? 'justify-between' : 'justify-center'} items-center bg-white text-gray-800 rounded-2xl shadow-2xl backdrop-blur-[60px] font-semibold tracking-wider uppercase`}
+        className={`relative ${expanded ? "w-full" : "w-auto"} flex ${
+          expanded ? "justify-between" : "justify-center"
+        } items-center bg-white text-gray-800 rounded-2xl shadow-2xl backdrop-blur-[60px] font-semibold tracking-wider uppercase`}
         layout
         animate={{
           padding: expanded ? "12px 24px" : "8px 24px",
@@ -55,19 +54,16 @@ export default function Navbar() {
         transition={{
           duration: EXPAND_DURATION_MS / 1000,
           ease: [0.22, 1, 0.36, 1],
-          layout: { duration: EXPAND_DURATION_MS / 1000, ease: [0.22, 1, 0.36, 1] }
+          layout: { duration: EXPAND_DURATION_MS / 1000, ease: [0.22, 1, 0.36, 1] },
         }}
         style={{
-          transformOrigin: "center"
+          transformOrigin: "center",
         }}
       >
         {/* Left Navigation Section */}
         <div className="flex items-center gap-6">
           {navItems.map((item) => {
-            const isActive =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(item.href);
+            const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             const isVisible = expanded || isActive;
             return (
               <motion.div
@@ -75,7 +71,7 @@ export default function Navbar() {
                 initial={{
                   opacity: 0,
                   maxWidth: 0,
-                  scale: 0.95
+                  scale: 0.95,
                 }}
                 animate={{
                   opacity: isVisible ? 1 : 0,
@@ -84,7 +80,7 @@ export default function Navbar() {
                 }}
                 transition={{
                   duration: EXPAND_DURATION_MS / 1000,
-                  ease: [0.22, 1, 0.36, 1]
+                  ease: [0.22, 1, 0.36, 1],
                 }}
                 style={{
                   overflow: "hidden",
@@ -97,7 +93,7 @@ export default function Navbar() {
                     isActive ? "text-gray-600" : "text-gray-800"
                   } ${expanded ? "hover:animate-squiggle" : ""}`}
                   style={{
-                    padding: "10px 16px"
+                    padding: "10px 16px",
                   }}
                 >
                   {/* Active background */}
@@ -121,7 +117,7 @@ export default function Navbar() {
             transition={{
               duration: EXPAND_DURATION_MS / 1000,
               ease: [0.22, 1, 0.36, 1],
-              delay: 0.2
+              delay: 0.2,
             }}
           >
             <ConnectButton />

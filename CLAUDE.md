@@ -10,7 +10,7 @@ This is an ETHGlobal hackathon frontend project built with Vite, React, TypeScri
 
 - **Frontend Framework**: React 18 with TypeScript
 - **Build Tool**: Vite 7.x for fast development and building
-- **Web3 Stack**: 
+- **Web3 Stack**:
   - RainbowKit 2.2.8 for wallet connection UI
   - Wagmi 2.x for Web3 React hooks
   - Viem 2.x for Ethereum interactions
@@ -39,15 +39,18 @@ npm run lint
 ## Code Architecture
 
 ### Main Entry Point
+
 - `src/main.tsx`: Application entry point with Web3 providers setup
 - `src/App.tsx`: Main application component with wallet connection logic
 
 ### Web3 Configuration
+
 - RainbowKit providers wrap the entire app in `main.tsx`
 - WalletConnect projectId needs to be set (currently placeholder)
 - Multi-chain configuration supports major L1 and L2 networks
 
 ### Key Components
+
 - ConnectButton from RainbowKit provides wallet connection UI
 - useAccount and useBalance hooks from Wagmi for wallet state
 - Responsive design with custom CSS animations

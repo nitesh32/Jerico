@@ -31,10 +31,7 @@ function Home() {
               <h3>🚀 Ready for ETHGlobal Development</h3>
               <ul>
                 <li>✅ Wallet connection with RainbowKit</li>
-                <li>
-                  ✅ Multi-chain support (Ethereum, Polygon, Optimism, Arbitrum,
-                  Base)
-                </li>
+                <li>✅ Multi-chain support (Ethereum, Polygon, Optimism, Arbitrum, Base)</li>
                 <li>✅ TypeScript for type safety</li>
                 <li>✅ Vite for fast development</li>
                 <li>🔄 Ready to build your dApp!</li>
