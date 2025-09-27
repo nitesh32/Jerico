@@ -16,10 +16,12 @@ export default function Navbar() {
   const [dropped, setDropped] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
-
   useEffect(() => {
     const dropTimer = window.setTimeout(() => setDropped(true), 0);
-    const expandTimer = window.setTimeout(() => setExpanded(true), DROP_DURATION_MS);
+    const expandTimer = window.setTimeout(
+      () => setExpanded(true),
+      DROP_DURATION_MS
+    );
     return () => {
       clearTimeout(dropTimer);
       clearTimeout(expandTimer);
@@ -42,20 +44,23 @@ export default function Navbar() {
           padding: expanded ? "12px 24px" : "8px 24px",
           transform: expanded ? "scaleX(1)" : "scaleX(0.94)",
           transformOrigin: "center",
-          transition: `transform ${EXPAND_DURATION_MS}ms cubic-bezier(0.22, 1, 0.36, 1), padding ${EXPAND_DURATION_MS}ms ease`
+          transition: `transform ${EXPAND_DURATION_MS}ms cubic-bezier(0.22, 1, 0.36, 1), padding ${EXPAND_DURATION_MS}ms ease`,
         }}
       >
         {/* Left Navigation Section */}
         <div className="flex items-center gap-6">
           {navItems.map((item) => {
-            const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
             const isVisible = expanded || isActive;
             return (
               <Link
                 key={item.href}
                 to={item.href}
                 className={`relative inline-flex items-center rounded-xl transition-all ease-out group ${
-                  isActive ? "text-icterine" : "text-gray-800"
+                  isActive ? "#c5c5c5" : "text-gray-800"
                 } ${expanded ? "hover:animate-squiggle" : ""}`}
                 style={{
                   padding: isVisible ? "10px 16px" : "0px",
@@ -64,34 +69,30 @@ export default function Navbar() {
                   transform: isVisible ? "scale(1)" : "scale(0.95)",
                   overflow: "hidden",
                   pointerEvents: isVisible ? "auto" : "none",
-                  transitionDuration: `${EXPAND_DURATION_MS}ms`
+                  transitionDuration: `${EXPAND_DURATION_MS}ms`,
                 }}
               >
                 {/* Active background */}
                 {isActive && (
-                  <div 
-                    className="absolute inset-0 bg-gray-100 rounded-xl transition-all duration-300 ease-out"
-                  />
+                  <div className="absolute inset-0 bg-gray-100 rounded-xl transition-all duration-300 ease-out" />
                 )}
                 {/* Hover background */}
-                <div 
-                  className="absolute inset-0 bg-gray-50 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out"
-                />
+                <div className="absolute inset-0 bg-gray-50 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out" />
                 <span className="relative z-10">{item.label}</span>
               </Link>
             );
           })}
         </div>
-        
+
         {/* Right Section - Wallet Connect Button */}
         {expanded && (
-          <div 
+          <div
             className="transition-all ease-out"
             style={{
               opacity: expanded ? 1 : 0,
               transform: expanded ? "scale(1)" : "scale(0.95)",
               transitionDuration: `${EXPAND_DURATION_MS}ms`,
-              transitionDelay: "200ms"
+              transitionDelay: "200ms",
             }}
           >
             <ConnectButton />
