@@ -3,17 +3,15 @@ import InvoiceCreator from "../components/InvoiceCreator";
 function Home() {
   return (
     <div className="page-container">
-      <div className="page-content">
+      <div className="flex flex-col justify-center h-[800px]">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">PYUSD Invoice System</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">🦚 Jerico Invoice System</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Create and manage PYUSD invoices on Ethereum Sepolia. 
+            Create and manage PYUSD invoices on Ethereum. 
             Generate payment links with QR codes for easy peer-to-peer payments.
           </p>
         </div>
-        
-        <InvoiceCreator />
-        
+                
         <div className="mt-12 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">How it works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -49,6 +47,9 @@ function Home() {
           </div>
         </div>
       </div>
+
+      <InvoiceCreator />
+
     </div>
   );
 }

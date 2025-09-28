@@ -1,5 +1,6 @@
 import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { sepolia } from "wagmi/chains";
+import { decodeEventLog } from "viem";
 import { CONTRACTS, INVOICE_FACTORY_ABI, type Invoice } from "../utils/constants";
 import { parsePYUSDAmount, dateToTimestamp } from "../utils/contractHelpers";
 
@@ -8,9 +9,37 @@ import { parsePYUSDAmount, dateToTimestamp } from "../utils/contractHelpers";
  */
 export function useInvoiceContract() {
   const { writeContract, data: hash, isPending, error } = useWriteContract();
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+  const { data: receipt, isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
+
+  // Extract invoice ID from transaction logs
+  const getInvoiceIdFromReceipt = (): string | null => {
+    if (!receipt?.logs) return null;
+    
+    try {
+      for (const log of receipt.logs) {
+        try {
+          const decoded = decodeEventLog({
+            abi: INVOICE_FACTORY_ABI,
+            data: log.data,
+            topics: log.topics,
+          });
+          
+          if (decoded.eventName === 'InvoiceCreated') {
+            return decoded.args.id as string;
+          }
+        } catch {
+          // Skip logs that don't match our ABI
+          continue;
+        }
+      }
+    } catch (error) {
+      console.error('Error decoding transaction logs:', error);
+    }
+    
+    return null;
+  };
 
   /**
    * Create a new invoice
@@ -54,6 +83,7 @@ export function useInvoiceContract() {
     isConfirming,
     isConfirmed,
     error,
+    invoiceId: getInvoiceIdFromReceipt(),
   };
 }
 
