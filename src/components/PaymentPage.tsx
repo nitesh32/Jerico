@@ -82,7 +82,7 @@ export default function PaymentPage() {
   if (invoiceError || !invoice) {
     return (
       <div className="max-w-2xl mx-auto p-6">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+        <div className="bg-white/20 backdrop-blur-lg border border-white/30 rounded-lg shadow-xl p-6 text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
@@ -110,7 +110,7 @@ export default function PaymentPage() {
   if (paymentStep === "success" || isPaid) {
     return (
       <div className="max-w-2xl mx-auto p-6">
-        <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
+        <div className="bg-white/20 backdrop-blur-lg border border-white/30 rounded-lg shadow-xl p-6 text-center">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -120,7 +120,7 @@ export default function PaymentPage() {
           <p className="text-gray-600 mb-6">
             Your payment of {formatCurrency(invoiceAmount)} has been processed successfully.
           </p>
-          <div className="bg-white rounded-lg p-4 mb-6">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 mb-6">
             <div className="text-left space-y-2">
               <div className="flex justify-between">
                 <span className="text-gray-600">Organization:</span>
@@ -149,9 +149,9 @@ export default function PaymentPage() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="bg-white/20 backdrop-blur-lg border border-white/30 rounded-lg shadow-xl overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
+        <div className="bg-gradient-to-r from-blue-600/80 to-blue-700/80 backdrop-blur-sm px-6 py-4">
           <h1 className="text-2xl font-bold text-white">Invoice Payment</h1>
           <p className="text-blue-100">Pay with PYUSD on Ethereum Sepolia</p>
         </div>
@@ -163,7 +163,7 @@ export default function PaymentPage() {
             <StatusBadge status={status} />
           </div>
 
-          <div className="bg-gray-50 rounded-lg p-4 mb-6">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 mb-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="text-sm font-medium text-gray-700">Organization</label>
@@ -186,14 +186,14 @@ export default function PaymentPage() {
 
           <div className="mb-6">
             <label className="text-sm font-medium text-gray-700">Work Description</label>
-            <p className="text-gray-900 mt-1 p-3 bg-gray-50 rounded-md">{invoice.workDescription}</p>
+            <p className="text-gray-900 mt-1 p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-md">{invoice.workDescription}</p>
           </div>
 
           {/* QR Code Section */}
           <div className="mb-6 text-center">
             <button
               onClick={() => setShowQR(!showQR)}
-              className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+              className="text-white/60 hover:text-white/80 text-sm font-medium"
             >
               {showQR ? "Hide" : "Show"} QR Code for Mobile Payment
             </button>
@@ -207,7 +207,7 @@ export default function PaymentPage() {
 
           {/* Payment Section */}
           {isExpired ? (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+            <div className="bg-red-500/10 backdrop-blur-sm border border-red-300/30 rounded-lg p-4 text-center">
               <p className="text-red-800 font-medium">This invoice has expired</p>
               <p className="text-red-600 text-sm">Contact the organization to request a new invoice</p>
             </div>
@@ -217,14 +217,14 @@ export default function PaymentPage() {
               <ConnectButton />
             </div>
           ) : !hasSufficientBalance ? (
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center">
+            <div className="bg-yellow-500/10 backdrop-blur-sm border border-yellow-300/30 rounded-lg p-4 text-center">
               <p className="text-yellow-800 font-medium">Insufficient PYUSD Balance</p>
               <p className="text-yellow-600 text-sm">You need {formatCurrency(invoiceAmount)} to pay this invoice</p>
             </div>
           ) : (
             <div className="space-y-4">
               {needsApproval && paymentStep === "approval" && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="bg-blue-500/10 backdrop-blur-sm border border-blue-300/30 rounded-lg p-4">
                   <h3 className="font-medium text-blue-900 mb-2">Step 1: Approve PYUSD Spending</h3>
                   <p className="text-blue-700 text-sm mb-4">
                     You need to approve the contract to spend your PYUSD tokens first.
@@ -240,7 +240,7 @@ export default function PaymentPage() {
               )}
 
               {(canPay || paymentStep === "payment") && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div className="bg-green-500/10 backdrop-blur-sm border border-green-300/30 rounded-lg p-4">
                   <h3 className="font-medium text-green-900 mb-2">
                     {paymentStep === "payment" ? "Step 2: " : ""}Pay Invoice
                   </h3>
@@ -262,7 +262,7 @@ export default function PaymentPage() {
               )}
 
               {(paymentError || invoiceError) && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                <div className="bg-red-500/10 backdrop-blur-sm border border-red-300/30 rounded-lg p-4">
                   <p className="text-red-800 text-sm">
                     {(paymentError as any)?.message || (invoiceError as any)?.message || "An error occurred"}
                   </p>
