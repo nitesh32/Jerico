@@ -28,7 +28,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className="sticky top-0 z-10 w-full flex flex-col items-center pt-4 font-mono"
+      className="sticky top-0 z-10 w-full flex flex-col items-center pt-6 font-mono"
       initial={{
         transform: "translateY(-80px)",
         opacity: 0,
