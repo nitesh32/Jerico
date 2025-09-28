@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAccount } from "wagmi";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useInvoiceContract } from "../hooks/useInvoiceContract";
 import { validateInvoiceForm, generatePaymentUrl } from "../utils/contractHelpers";
 import { formatAmountInput, getMinimumDueDate } from "../utils/formatters";
@@ -12,8 +11,8 @@ interface InvoiceCreatorProps {
 }
 
 export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
-  const { address, isConnected } = useAccount();
-  const { createInvoice, isPending, isConfirming, isConfirmed, hash, error } = useInvoiceContract();
+  const { isConnected } = useAccount();
+  const { createInvoice, isPending, isConfirming, isConfirmed, error, invoiceId } = useInvoiceContract();
 
   const [formData, setFormData] = useState<InvoiceFormData>({
     orgName: "",
@@ -66,10 +65,7 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
   };
 
   // Handle successful transaction
-  if (isConfirmed && hash && !showSuccess) {
-    // In a real implementation, you'd extract the invoice ID from the transaction logs
-    // For now, we'll simulate it with the transaction hash
-    const invoiceId = hash;
+  if (isConfirmed && invoiceId && !showSuccess) {
     setCreatedInvoiceId(invoiceId);
     setShowSuccess(true);
     onSuccess?.(invoiceId);
@@ -128,7 +124,7 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
                 type="text"
                 value={paymentUrl}
                 readOnly
-                className="w-full px-3 py-2 border border-white/30 rounded-md bg-white/20 backdrop-blur-sm text-sm"
+                className="w-full px-3 py-2 border border-white/30 rounded-md bg-white/50 backdrop-blur-sm text-sm text-black"
               />
             </div>
             <button

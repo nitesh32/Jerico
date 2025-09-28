@@ -5,9 +5,9 @@ function Home() {
     <div className="page-container">
       <div className="flex flex-col justify-center h-[800px]">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">PYUSD Invoice System</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">🦚 Jerico Invoice System</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Create and manage PYUSD invoices on Ethereum Sepolia. 
+            Create and manage PYUSD invoices on Ethereum. 
             Generate payment links with QR codes for easy peer-to-peer payments.
           </p>
         </div>
