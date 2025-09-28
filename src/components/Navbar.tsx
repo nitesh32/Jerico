@@ -16,6 +16,7 @@ export default function Navbar() {
   const pathname = location.pathname;
   const [dropped, setDropped] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
 
   useEffect(() => {
     const dropTimer = window.setTimeout(() => setDropped(true), 0);
@@ -25,6 +26,21 @@ export default function Navbar() {
       clearTimeout(expandTimer);
     };
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const getResponsivePadding = () => {
+    if (windowWidth >= 1024) return "12px 24px";
+    if (windowWidth >= 640) return "8px 16px";
+    return "6px 12px";
+  };
 
   return (
     <motion.nav
@@ -43,12 +59,12 @@ export default function Navbar() {
       }}
     >
       <motion.div
-        className={`relative ${expanded ? "w-[1000px]" : "w-fit"} flex ${
+        className={`relative ${expanded ? "w-full max-w-[1000px] mx-4 sm:mx-6 lg:mx-8" : "w-fit"} flex ${
           expanded ? "justify-between" : "justify-center"
         } items-center bg-white text-gray-800 rounded-2xl shadow-2xl backdrop-blur-[60px] font-semibold tracking-wider uppercase`}
         layout
         animate={{
-          padding: "12px 24px",
+          padding: getResponsivePadding(),
           scaleX: 1,
         }}
         transition={{
@@ -61,7 +77,7 @@ export default function Navbar() {
         }}
       >
         {/* Left Navigation Section */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 sm:gap-4 lg:gap-6">
           {navItems.map((item) => {
             const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             const isVisible = expanded || isActive;
@@ -89,12 +105,9 @@ export default function Navbar() {
               >
                 <Link
                   to={item.href}
-                  className={`relative inline-flex items-center rounded-xl group ${
+                  className={`relative inline-flex items-center rounded-xl group text-sm sm:text-base ${
                     isActive ? "text-gray-600" : "text-gray-800"
-                  } ${expanded ? "hover:animate-squiggle" : ""}`}
-                  style={{
-                    padding: "10px 16px",
-                  }}
+                  } ${expanded ? "hover:animate-squiggle" : ""} px-2 py-2 sm:px-4 sm:py-2 lg:px-4 lg:py-[10px]`}
                 >
                   {/* Active background */}
                   {isActive && (
@@ -119,6 +132,7 @@ export default function Navbar() {
               ease: [0.22, 1, 0.36, 1],
               delay: 0.2,
             }}
+            className="shrink-0"
           >
             <ConnectButton />
           </motion.div>
