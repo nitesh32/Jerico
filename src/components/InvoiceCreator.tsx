@@ -87,23 +87,11 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
     setShowSuccess(false);
   };
 
-  if (!isConnected) {
-    return (
-      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Create Invoice</h2>
-          <p className="text-gray-600 mb-6">Connect your wallet to create invoices</p>
-          <ConnectButton />
-        </div>
-      </div>
-    );
-  }
-
   if (showSuccess && createdInvoiceId) {
     const paymentUrl = generatePaymentUrl(createdInvoiceId);
 
     return (
-      <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+      <div className="max-w-2xl mx-auto p-6 bg-white/20 backdrop-blur-lg border border-white/30 rounded-lg shadow-xl">
         <div className="text-center mb-6">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,7 +102,7 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
           <p className="text-gray-600">Your invoice has been created and stored on the blockchain.</p>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-6 mb-6">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 mb-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Details</h3>
           <div className="space-y-3">
             <div>
@@ -132,7 +120,7 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
           </div>
         </div>
 
-        <div className="bg-blue-50 rounded-lg p-6 mb-6">
+        <div className="bg-blue-500/10 backdrop-blur-sm border border-blue-300/30 rounded-lg p-6 mb-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Share Payment Link</h3>
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             <div className="flex-1">
@@ -140,7 +128,7 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
                 type="text"
                 value={paymentUrl}
                 readOnly
-                className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm"
+                className="w-full px-3 py-2 border border-white/30 rounded-md bg-white/20 backdrop-blur-sm text-sm"
               />
             </div>
             <button
@@ -176,7 +164,7 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white text-gray-900 rounded-lg shadow-lg">
+    <div className="max-w-2xl mx-auto p-6 bg-white/20 backdrop-blur-lg border border-white/30 text-gray-900 rounded-lg shadow-xl">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Create New Invoice</h2>
         <p className="text-gray-600">Fill out the details below to create a PYUSD invoice</p>
@@ -192,8 +180,8 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
             id="orgName"
             value={formData.orgName}
             onChange={(e) => handleInputChange("orgName", e.target.value)}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-              errors.orgName ? "border-red-500" : "border-gray-300"
+            className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+              errors.orgName ? "border-red-500" : "border-white/30"
             }`}
             placeholder="Enter your organization name"
             disabled={isPending || isConfirming}
@@ -210,8 +198,8 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
             value={formData.workDescription}
             onChange={(e) => handleInputChange("workDescription", e.target.value)}
             rows={4}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-              errors.workDescription ? "border-red-500" : "border-gray-300"
+            className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+              errors.workDescription ? "border-red-500" : "border-white/30"
             }`}
             placeholder="Describe the work or services provided"
             disabled={isPending || isConfirming}
@@ -229,8 +217,8 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
               id="amount"
               value={formData.amount}
               onChange={(e) => handleInputChange("amount", e.target.value)}
-              className={`w-full px-3 py-2 pr-16 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                errors.amount ? "border-red-500" : "border-gray-300"
+              className={`w-full px-3 py-2 pr-16 border rounded-md shadow-sm bg-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                errors.amount ? "border-red-500" : "border-white/30"
               }`}
               placeholder="0.00"
               disabled={isPending || isConfirming}
@@ -252,8 +240,8 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
             value={formData.dueDate}
             onChange={(e) => handleInputChange("dueDate", e.target.value)}
             min={getMinimumDueDate()}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-              errors.dueDate ? "border-red-500" : "border-gray-300"
+            className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+              errors.dueDate ? "border-red-500" : "border-white/30"
             }`}
             disabled={isPending || isConfirming}
           />
@@ -281,13 +269,6 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
         </button>
       </form>
 
-      <div className="mt-6 p-4 bg-gray-50 rounded-md">
-        <h3 className="text-sm font-medium text-gray-900 mb-2">Connected Wallet</h3>
-        <p className="text-sm text-gray-600">{address}</p>
-        <div className="mt-2">
-          <ConnectButton />
-        </div>
-      </div>
     </div>
   );
 }
