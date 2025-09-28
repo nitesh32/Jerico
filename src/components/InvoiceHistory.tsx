@@ -25,12 +25,15 @@ function InvoiceRow({ invoiceId, onCopyLink }: InvoiceRowProps) {
   if (isLoading) {
     return (
       <tr className="animate-pulse">
-        <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
-        <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
-        <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
-        <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
-        <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
-        <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
+        <td className="px-3 sm:px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
+        <td className="px-3 sm:px-6 py-4 w-96">
+          <div className="h-4 bg-gray-200 rounded mb-2"></div>
+          <div className="h-8 bg-gray-200 rounded"></div>
+        </td>
+        <td className="px-3 sm:px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
+        <td className="px-3 sm:px-6 py-4 hidden sm:table-cell"><div className="h-4 bg-gray-200 rounded"></div></td>
+        <td className="px-3 sm:px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
+        <td className="px-3 sm:px-6 py-4"><div className="h-4 bg-gray-200 rounded"></div></td>
       </tr>
     );
   }
@@ -38,7 +41,7 @@ function InvoiceRow({ invoiceId, onCopyLink }: InvoiceRowProps) {
   if (!invoice) {
     return (
       <tr>
-        <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
+        <td colSpan={6} className="px-3 sm:px-6 py-4 text-center text-gray-500">
           Failed to load invoice
         </td>
       </tr>
@@ -49,26 +52,26 @@ function InvoiceRow({ invoiceId, onCopyLink }: InvoiceRowProps) {
   const paymentUrl = generatePaymentUrl(invoiceId);
 
   return (
-    <tr className="hover:bg-gray-50">
-      <td className="px-6 py-4 whitespace-nowrap">
+    <tr className="hover:bg-white/10 hover:backdrop-blur-sm transition-colors">
+      <td className="px-3 sm:px-6 py-4 align-top">
         <StatusBadge status={status} />
       </td>
-      <td className="px-6 py-4">
-        <div className="text-sm font-medium text-gray-900">{invoice.orgName}</div>
-        <div className="text-sm text-gray-500 truncate max-w-xs">{invoice.workDescription}</div>
+      <td className="px-3 sm:px-6 py-4 align-top w-96">
+        <div className="text-sm font-medium text-gray-900 mb-1">{invoice.orgName}</div>
+        <div className="text-sm text-gray-600 whitespace-normal leading-relaxed">{invoice.workDescription}</div>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap">
+      <td className="px-3 sm:px-6 py-4 align-top whitespace-nowrap">
         <div className="text-sm font-medium text-gray-900">
           {formatCurrency(formatPYUSDAmount(invoice.amount))}
         </div>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-3 sm:px-6 py-4 align-top whitespace-nowrap text-sm text-gray-600 hidden sm:table-cell">
         {formatDisplayDate(new Date(Number(invoice.billDate) * 1000))}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-3 sm:px-6 py-4 align-top whitespace-nowrap text-sm text-gray-600">
         {formatDisplayDate(new Date(Number(invoice.dueDate) * 1000))}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+      <td className="px-3 sm:px-6 py-4 align-top whitespace-nowrap text-right text-sm font-medium">
         <div className="flex items-center gap-2">
           <button
             onClick={() => onCopyLink(paymentUrl)}
@@ -121,8 +124,8 @@ export default function InvoiceHistory() {
 
   if (!isConnected) {
     return (
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="text-center bg-white rounded-lg shadow-lg p-8">
+      <div className="w-full">
+        <div className="text-center bg-white/20 backdrop-blur-lg border border-white/30 rounded-lg shadow-xl p-8">
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -137,7 +140,7 @@ export default function InvoiceHistory() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="w-full">
       {/* Header */}
       <div className="mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -146,8 +149,8 @@ export default function InvoiceHistory() {
             <p className="text-gray-600 mt-1">Manage and track your PYUSD invoices</p>
           </div>
           <div className="mt-4 sm:mt-0">
-            <div className="bg-white rounded-lg shadow px-4 py-2">
-              <div className="text-sm text-gray-600">PYUSD Balance</div>
+            <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg px-4 py-2">
+              <div className="text-sm text-gray-700">PYUSD Balance</div>
               <div className="text-lg font-semibold text-gray-900">{balanceFormatted}</div>
             </div>
           </div>
@@ -155,37 +158,37 @@ export default function InvoiceHistory() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-sm font-medium text-gray-600">Total Invoices</div>
-          <div className="text-2xl font-bold text-gray-900">{invoiceIds?.length || 0}</div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
+        <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg p-4 lg:p-6">
+          <div className="text-sm font-medium text-gray-700">Total Invoices</div>
+          <div className="text-xl lg:text-2xl font-bold text-gray-900">{invoiceIds?.length || 0}</div>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-sm font-medium text-gray-600">Pending</div>
-          <div className="text-2xl font-bold text-yellow-600">-</div>
+        <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg p-4 lg:p-6">
+          <div className="text-sm font-medium text-gray-700">Pending</div>
+          <div className="text-xl lg:text-2xl font-bold text-yellow-600">-</div>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-sm font-medium text-gray-600">Paid</div>
-          <div className="text-2xl font-bold text-green-600">-</div>
+        <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg p-4 lg:p-6">
+          <div className="text-sm font-medium text-gray-700">Paid</div>
+          <div className="text-xl lg:text-2xl font-bold text-green-600">-</div>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-sm font-medium text-gray-600">Expired</div>
-          <div className="text-2xl font-bold text-red-600">-</div>
+        <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg p-4 lg:p-6">
+          <div className="text-sm font-medium text-gray-700">Expired</div>
+          <div className="text-xl lg:text-2xl font-bold text-red-600">-</div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow mb-6">
-        <div className="px-6 py-4 border-b border-gray-200">
+      <div className="bg-white/20 backdrop-blur-lg border border-white/30 rounded-lg shadow-xl mb-6 text-white">
+        <div className="px-4 sm:px-6 py-4 border-b border-white/20">
           <div className="flex flex-wrap gap-2">
             {filterButtons.map((button) => (
               <button
                 key={button.key}
                 onClick={() => setFilter(button.key)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-md text-sm font-medium ${
                   filter === button.key
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-gray-100 text-white"
+                    : "bg-gray-100 text-gray-400 hover:bg-gray-200"
                 }`}
               >
                 {button.label}
@@ -204,7 +207,7 @@ export default function InvoiceHistory() {
             <button
               onClick={() => refetch()}
               disabled={isLoading}
-              className="text-sm text-blue-600 hover:text-blue-700 disabled:opacity-50 transition-colors"
+              className="text-sm text-white/80 hover:text-white disabled:opacity-50 transition-colors"
             >
               {isLoading ? "Refreshing..." : "Refresh"}
             </button>
@@ -213,7 +216,7 @@ export default function InvoiceHistory() {
 
         {/* Copy Success Message */}
         {copySuccess && (
-          <div className="px-6 py-2 bg-green-50 border-b border-green-200">
+          <div className="px-4 sm:px-6 py-2 bg-green-500/10 backdrop-blur-sm border-b border-green-300/30">
             <p className="text-sm text-green-800">✅ Payment link copied to clipboard!</p>
           </div>
         )}
@@ -252,36 +255,36 @@ export default function InvoiceHistory() {
               <p className="text-gray-600 mb-4">Create your first invoice to get started</p>
               <a
                 href="/"
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-4 py-2 bg-black text-white rounded-md hover:text-white transition-colors"
               >
                 Create Invoice
               </a>
             </div>
           ) : (
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-white/20">
+              <thead className="bg-white/10 backdrop-blur-sm">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-6 py-4 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-6 py-4 text-left text-xs font-medium text-gray-700 uppercase tracking-wider w-96">
                     Organization & Description
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-6 py-4 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                     Amount
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-6 py-4 text-left text-xs font-medium text-gray-700 uppercase tracking-wider hidden sm:table-cell">
                     Created
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-6 py-4 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                     Due Date
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-6 py-4 text-right text-xs font-medium text-gray-700 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="divide-y divide-white/20">
                 {invoiceIds.map((invoiceId) => (
                   <InvoiceRow
                     key={invoiceId}
