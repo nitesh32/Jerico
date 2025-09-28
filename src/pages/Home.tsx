@@ -3,7 +3,7 @@ import InvoiceCreator from "../components/InvoiceCreator";
 function Home() {
   return (
     <div className="page-container">
-      <div className="flex flex-col justify-center h-[800px] border-2 border-amber-800">
+      <div className="flex flex-col justify-center h-[800px]">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">PYUSD Invoice System</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">

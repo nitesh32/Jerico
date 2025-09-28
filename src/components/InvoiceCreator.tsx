@@ -182,9 +182,9 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
             onChange={(e) => handleInputChange("orgName", e.target.value)}
             className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
               errors.orgName ? "border-red-500" : "border-white/30"
-            }`}
+            } ${!isConnected ? "opacity-60" : ""}`}
             placeholder="Enter your organization name"
-            disabled={isPending || isConfirming}
+            disabled={!isConnected || isPending || isConfirming}
           />
           {errors.orgName && <p className="mt-1 text-sm text-red-600">{errors.orgName}</p>}
         </div>
@@ -200,9 +200,9 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
             rows={4}
             className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
               errors.workDescription ? "border-red-500" : "border-white/30"
-            }`}
+            } ${!isConnected ? "opacity-60" : ""}`}
             placeholder="Describe the work or services provided"
-            disabled={isPending || isConfirming}
+            disabled={!isConnected || isPending || isConfirming}
           />
           {errors.workDescription && <p className="mt-1 text-sm text-red-600">{errors.workDescription}</p>}
         </div>
@@ -219,9 +219,9 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
               onChange={(e) => handleInputChange("amount", e.target.value)}
               className={`w-full px-3 py-2 pr-16 border rounded-md shadow-sm bg-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
                 errors.amount ? "border-red-500" : "border-white/30"
-              }`}
+              } ${!isConnected ? "opacity-60" : ""}`}
               placeholder="0.00"
-              disabled={isPending || isConfirming}
+              disabled={!isConnected || isPending || isConfirming}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
               <span className="text-gray-500 text-sm">PYUSD</span>
@@ -242,8 +242,8 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
             min={getMinimumDueDate()}
             className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
               errors.dueDate ? "border-red-500" : "border-white/30"
-            }`}
-            disabled={isPending || isConfirming}
+            } ${!isConnected ? "opacity-60" : ""}`}
+            disabled={!isConnected || isPending || isConfirming}
           />
           {errors.dueDate && <p className="mt-1 text-sm text-red-600">{errors.dueDate}</p>}
         </div>
@@ -258,10 +258,12 @@ export default function InvoiceCreator({ onSuccess }: InvoiceCreatorProps) {
 
         <button
           type="submit"
-          disabled={isPending || isConfirming}
+          disabled={!isConnected || isPending || isConfirming}
           className="w-full px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          {isPending
+          {!isConnected
+            ? "Connect Wallet to Create Invoice"
+            : isPending
             ? "Creating Invoice..."
             : isConfirming
             ? "Confirming Transaction..."
